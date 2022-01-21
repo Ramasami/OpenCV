@@ -1,7 +1,6 @@
 # https://github.com/opencv/opencv/tree/master/data/haarcascades
 
 # %% imports
-from tracemalloc import stop
 import cv2 as cv
 
 # %% Value Settings
