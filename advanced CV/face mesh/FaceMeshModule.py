@@ -38,5 +38,5 @@ class FaceDetector:
                     x, y = int(lm.x * w), int(lm.y * h)
                     lm_list.append((id, x, y))
                     if draw:
-                        cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_PLAIN, 0.6, (255, 255, 255))
+                        cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_PLAIN, 0.6, (0, 255, 0))
         return lm_list
