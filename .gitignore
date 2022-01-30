@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 OpenCV Course.mp4
+Advanced OpenCV Course.mp4
 tempCodeRunnerFile.py
-simpsons/dataset
+simpsons
