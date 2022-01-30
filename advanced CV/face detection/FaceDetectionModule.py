@@ -21,8 +21,6 @@ class FaceDetector:
         return img
 
     def find_position(self, img, draw=True):
-        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        self.results = self.face.process(img_rgb)
         bboxes = []
         if self.results.detections:
             for detection in self.results.detections:
