@@ -29,12 +29,14 @@ class FaceDetector:
                                            self.drawSpec)
         return img
 
-    def find_position(self, img):
+    def find_position(self, img, draw=True):
         lm_list = []
         if (self.results.multi_face_landmarks):
             for face_landmarks in self.results.multi_face_landmarks:
                 for id, lm in enumerate(face_landmarks.landmark):
                     h, w, c = img.shape
                     x, y = int(lm.x * w), int(lm.y * h)
-                    lm_list.append([id, x, y])
+                    lm_list.append((id, x, y))
+                    if draw:
+                        cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_PLAIN, 0.6, (255, 255, 255))
         return lm_list
