@@ -1,12 +1,12 @@
-import math
-
 import cv2
 import mediapipe as mp
+import math
 
 
 class PoseDetector:
     def __init__(self, mode=False, model_complexity=1, smooth_landmarks=True, enable_segmentation=False,
                  smooth_segmentation=True, detection_confidence=0.5, track_confidence=0.5):
+        self.lm_list = None
         self.results = None
         self.mode = mode
         self.model_complexity = model_complexity
@@ -62,3 +62,4 @@ class PoseDetector:
             cv2.circle(img, (x3, y3), 10, (255, 0, 0), 1)
             cv2.putText(img, str(int(angle)), (x2 - 20, y2 + 50), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 0), 1)
         return angle
+

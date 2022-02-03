@@ -4,6 +4,7 @@ import mediapipe as mp
 
 class HandDetector:
     def __init__(self, mode=False, max_hands=2, model_complexity=1, detection_confidence=0.5, track_confidence=0.5):
+        self.lm_list = None
         self.results = None
         self.mode = mode
         self.max_hands = max_hands
@@ -39,17 +40,17 @@ class HandDetector:
         return self.lm_list
 
     def fingers_up(self):
-        fingersOpen = []
-        tipIds = [8, 12, 16, 20]
+        fingers_open = []
+        tip_ids = [8, 12, 16, 20]
         if (self.lm_list[4][1] < self.lm_list[20][1] and self.lm_list[4][1] < self.lm_list[3][1]) or (
                 self.lm_list[4][1] > self.lm_list[20][1] and self.lm_list[4][1] > self.lm_list[3][1]):
-            fingersOpen.append(True)
+            fingers_open.append(True)
         else:
-            fingersOpen.append(False)
+            fingers_open.append(False)
 
-        for tip in tipIds:
+        for tip in tip_ids:
             if self.lm_list[tip][2] < self.lm_list[tip - 2][2]:
-                fingersOpen.append(True)
+                fingers_open.append(True)
             else:
-                fingersOpen.append(False)
-        return fingersOpen
+                fingers_open.append(False)
+        return fingers_open
