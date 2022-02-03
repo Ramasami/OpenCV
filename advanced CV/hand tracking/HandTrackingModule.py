@@ -39,9 +39,21 @@ class HandDetector:
                     cv2.circle(img, (cx, cy), 10, (255, 0, 255), cv2.FILLED)
         return self.lm_list
 
+    def get_bbox(self, img, draw=True):
+        if len(self.lm_list) == 0:
+            return
+        x_list = [c[1] for c in self.lm_list]
+        y_list = [c[2] for c in self.lm_list]
+        x_min, x_max = min(x_list), max(x_list)
+        y_min, y_max = min(y_list), max(y_list)
+        bbox = x_min, x_max, y_min, y_max
+        if draw:
+            cv2.rectangle(img, (x_min - 20, y_min - 20), (x_max + 20, y_max + 20), (0, 255, 0), 2)
+        return bbox
+
     def fingers_up(self):
         fingers_open = []
-        if self.lm_list is [] or self.lm_list is None:
+        if self.lm_list is None or len(self.lm_list) == 0:
             return [False, False, False, False, False]
         tip_ids = [8, 12, 16, 20]
         if (self.lm_list[4][1] < self.lm_list[20][1] and self.lm_list[4][1] < self.lm_list[3][1]) or (
