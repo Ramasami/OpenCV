@@ -72,7 +72,6 @@ class HandDetector:
         return fingers_open
 
     def find_distance(self, p1, p2, img, draw=True, r=15, t=3):
-        print(self.lm_list, self.lm_list is None, len(self.lm_list) == 0)
         if self.lm_list is None or len(self.lm_list) == 0:
             return None, img, None
         _, x1, y1 = self.lm_list[p1]
