@@ -72,17 +72,16 @@ class HandDetector:
         return fingers_open
 
     def find_distance(self, p1, p2, img, draw=True, r=15, t=3):
+        print(self.lm_list, self.lm_list is None, len(self.lm_list) == 0)
         if self.lm_list is None or len(self.lm_list) == 0:
             return None, img, None
-        x1, y1 = self.lm_list[p1][1:]
-        x2, y2 = self.lm_list[p2][1:]
+        _, x1, y1 = self.lm_list[p1]
+        _, x2, y2 = self.lm_list[p2]
         cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
-        length = None
         if draw:
             cv2.line(img, (x1, y1), (x2, y2), (255, 0, 255), t)
             cv2.circle(img, (x1, y1), r, (255, 0, 255), cv2.FILLED)
             cv2.circle(img, (x2, y2), r, (255, 0, 255), cv2.FILLED)
             cv2.circle(img, (cx, cy), r, (0, 0, 255), cv2.FILLED)
-            length = math.hypot(x2 - x1, y2 - y1)
-
+        length = math.hypot(x2 - x1, y2 - y1)
         return length, img, [x1, y1, x2, y2, cx, cy]
