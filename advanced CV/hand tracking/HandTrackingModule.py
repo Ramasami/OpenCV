@@ -1,6 +1,7 @@
+import math
+
 import cv2
 import mediapipe as mp
-import math
 
 
 class HandDetector:
@@ -71,6 +72,8 @@ class HandDetector:
         return fingers_open
 
     def find_distance(self, p1, p2, img, draw=True, r=15, t=3):
+        if self.lm_list is None or len(self.lm_list) == 0:
+            return None, img, None
         x1, y1 = self.lm_list[p1][1:]
         x2, y2 = self.lm_list[p2][1:]
         cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
