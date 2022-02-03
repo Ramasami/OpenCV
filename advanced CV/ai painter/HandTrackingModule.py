@@ -41,7 +41,7 @@ class HandDetector:
 
     def fingers_up(self):
         fingers_open = []
-        if self.lm_list is None:
+        if self.lm_list is [] or self.lm_list is None:
             return [False, False, False, False, False]
         tip_ids = [8, 12, 16, 20]
         if (self.lm_list[4][1] < self.lm_list[20][1] and self.lm_list[4][1] < self.lm_list[3][1]) or (
